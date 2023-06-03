@@ -3,6 +3,11 @@
   "sub_title": "Ucas",
   "username": "Username",
   "password": "Password",
-    "login":"Login"
-
+  "login": "LOGIN",
+  "rememberMe":"Remember me" ,
+  "signUp":"SIGN UP",
+  "newMember":"New Member?",
+  "serviceProvider":"Service Provider",
+  "customer":"Customer",
+  "forgotPassword":"Forgot Password?"
 }

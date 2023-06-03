@@ -1,7 +1,13 @@
 {
-  "title": "UCAS - الكليات",
+  "title": "UCAS - Faculties",
   "sub_title": "Ucas",
   "username": "اسم المستخدم",
   "password": "كلمة المرور",
-  "login":"تسجيل الدخول"
+  "login": "تسجيل دخول",
+  "rememberMe":"تذكرني",
+  "signUp":"انشاء حساب",
+  "newMember":"مستخدم جديد?",
+   "serviceProvider":"مزود الخدمة",
+   "customer":"عميل",
+    "forgotPassword":"نسيت كلمة المرور؟"
 }

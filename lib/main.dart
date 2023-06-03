@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_quizzes/AppColors.dart';
 import 'package:flutter_quizzes/SharedPreferencesController.dart';
+import 'package:flutter_quizzes/login.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,6 +15,7 @@ import 'login.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   await SharedPreferencesController().getInit();
   runApp(MyApp());
 }
@@ -63,16 +67,26 @@ class _SplashPageState extends State<SplashPage> {
               builder: (context) =>
                   SharedPreferencesController().getData("login") ?? false
                       ? Home()
-                      : Login()));
+                      : Home()));
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Image.network(
-            "https://th.bing.com/th/id/OIP.7IB8knZlkf8V-E9-8vU4HgHaDn?pid=ImgDet&rs=1"),
+      body: Container(
+        decoration: BoxDecoration(
+        gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Colors.blue, AppColors.Screen],),),
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Image.asset('asset/splash.png',width: 422,height: 341,),
+            ),
+          )
       ),
     );
   }
