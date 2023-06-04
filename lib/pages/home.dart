@@ -8,7 +8,6 @@ import 'package:flutter_quizzes/pojo/product.dart';
 import 'package:flutter_quizzes/pojo/work.dart';
 import 'package:http/http.dart' as http;
 
-import 'controller/api_dataRepo.dart';
 // class Home extends StatefulWidget {
 //   @override
 //   State<Home> createState() => _HomeState();
@@ -77,6 +76,8 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        automaticallyImplyLeading: false, // Hide the back button
+
       ),
       body: FutureBuilder<List<data>>(
         future: ApiController().getAllData(),

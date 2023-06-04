@@ -134,21 +134,37 @@ class ApiController with ApiMixin {
 
 
 
+  Future<ApiResponse> register({required User user1}) async {
+    Uri url = Uri.parse('https://studentucas.awamr.com/api/auth/register/user');
 
-  Future<ApiResponse> register({required User user}) async {
-    Uri url = Uri.parse(ApiSetting.postRegester);
-    http.Response response = await http.post(url,
-        body: user.toJsonRegister(),
-        headers: {HttpHeaders.contentTypeHeader: 'application/json'});
+    try {
+      http.Response response = await http.post(
+        url,
+        body: user1.toJsonRegister(),
+      );
 
-    if (response.statusCode == 201 || response.statusCode == 400) {
-      var jsonResponse = jsonDecode(response.body);
-      ApiResponse api_response = ApiResponse.fromJson(jsonResponse);
-
-      return api_response;
+      if (response.statusCode == 201 || response.statusCode == 400) {
+        var jsonResponse = jsonDecode(response.body);
+        ApiResponse rrespose = ApiResponse.fromJson(jsonResponse);
+        print(rrespose);
+        print(user1.toString());
+        return rrespose;
+      } else {
+        // Handle other status codes if needed
+        return ApiResponse(
+          success: false,
+          message: 'Failed to register user. Status code: ${response.statusCode}',
+        );
+      }
+    } catch (e) {
+      // Handle exceptions
+      return ApiResponse(
+        success: false,
+        message: 'An error occurred during registration: $e',
+      );
     }
-    return failedResponse;
   }
+
 
   Future<ApiResponse> resetPassword({email, pass, repass, code}) async {
     Uri uri = Uri.parse(ApiSetting.postLogin);
@@ -216,11 +232,10 @@ class ApiController with ApiMixin {
   }
   Future<ApiResponse> Rigester({required User user1}) async {
     Uri url = Uri.parse(ApiSetting.postRegester);
-      print(user1.toJsonRegister());
+
     http.Response response = await http.post(
       url,
       body: user1.toJsonRegister(),
-      // headers: {HttpHeaders.contentTypeHeader: 'application/json'}
     );
 
     if (response.statusCode == 201 || response.statusCode == 400) {

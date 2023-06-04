@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_quizzes/AppColors.dart';
-import 'package:flutter_quizzes/SharedPreferencesController.dart';
-import 'package:flutter_quizzes/login.dart';
+import 'package:flutter_quizzes/pojo/AppColors.dart';
+import 'package:flutter_quizzes/controller/SharedPreferencesController.dart';
+import 'package:flutter_quizzes/auth/login.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +11,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'home.dart';
-import 'login.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,7 +66,7 @@ class _SplashPageState extends State<SplashPage> {
               builder: (context) =>
                   SharedPreferencesController().getData("login") ?? false
                       ? Home()
-                      : Home()));
+                      : Login()));
     });
   }
 

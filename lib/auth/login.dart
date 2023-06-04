@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_quizzes/controller/api_controller.dart';
 import 'package:flutter_quizzes/pojo/ApiResponse.dart';
-import 'package:flutter_quizzes/sign_up.dart';
+import 'package:flutter_quizzes/auth/sign_up.dart';
 import 'package:http/http.dart' as http;
-import 'AppColors.dart';
-import 'SharedPreferencesController.dart';
-import 'home.dart';
+import '../pages/home.dart';
+import '../pojo/AppColors.dart';
+import '../controller/SharedPreferencesController.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -88,14 +88,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                         tabs: [
                           Tab(
                               text:
-                              AppLocalizations
-                                  .of(context)
-                                  .serviceProvider,
+                                  AppLocalizations.of(context).serviceProvider,
                               height: 48),
                           Tab(
-                              text: AppLocalizations
-                                  .of(context)
-                                  .customer,
+                              text: AppLocalizations.of(context).customer,
                               height: 48),
                         ],
                       ),
@@ -179,7 +175,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                         fillColor: Colors.white,
                         filled: true,
                         contentPadding:
-                        EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                           borderSide: BorderSide(
@@ -213,7 +209,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                         fillColor: AppColors.background,
                         filled: true,
                         contentPadding:
-                        EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                           borderSide: BorderSide(
@@ -248,18 +244,14 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                 });
                               },
                             ),
-                            Text(AppLocalizations
-                                .of(context)
-                                .rememberMe),
+                            Text(AppLocalizations.of(context).rememberMe),
                           ],
                         ),
                         Spacer(),
                         TextButton(
                           onPressed: () {},
                           child: Text(
-                              AppLocalizations
-                                  .of(context)
-                                  .forgotPassword,
+                              AppLocalizations.of(context).forgotPassword,
                               style: TextStyle(color: Colors.black)),
                         ),
                       ],
@@ -273,9 +265,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(AppLocalizations
-                                  .of(context)
-                                  .newMember,
+                              Text(AppLocalizations.of(context).newMember,
                                   style: TextStyle(
                                       fontSize: 16,
                                       color: Colors.black,
@@ -284,13 +274,11 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                 onPressed: () {
                                   Navigator.of(context).push(
                                       MaterialPageRoute(builder: (context) {
-                                        return SignUp();
-                                      }));
+                                    return SignUp();
+                                  }));
                                 },
                                 child: Text(
-                                  AppLocalizations
-                                      .of(context)
-                                      .signUp,
+                                  AppLocalizations.of(context).signUp,
                                   style: TextStyle(
                                     decoration: TextDecoration.underline,
                                     fontSize: 16,
@@ -314,9 +302,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18),
-                                  AppLocalizations
-                                      .of(context)
-                                      .login,
+                                  AppLocalizations.of(context).login,
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -338,7 +324,6 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   Future<void> _prefomLogin() async {
     if (_checkData()) {
       await _login();
-
     }
   }
 
@@ -346,32 +331,28 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
     if (_emailController.text.isNotEmpty &&
         _passwordController.text.isNotEmpty &&
         _passwordController.text.length >= 6 &&
-        _passwordController.text.length <= 30
-    ){
+        _passwordController.text.length <= 30) {
       return true;
-    }return false;
+    }
+    return false;
   }
 
   Future<void> _login() async {
-     ApiResponse response =await ApiController().
-     Login(email: _emailController.text , password: _passwordController.text);
-     print("response${response.success}");
-     print("response${response.data}");
-    if(response.success!){
+    ApiResponse response = await ApiController().Login(
+        email: _emailController.text, password: _passwordController.text);
+    print("response${response.success}");
+    print("response${response.data}");
+    if (response.success!) {
       print(response.success);
-      SharedPreferencesController c =
-      SharedPreferencesController();
+      SharedPreferencesController c = SharedPreferencesController();
       await c.getInit();
       c.setData(key: "login", value: rememberMe);
-      if (rememberMe) {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) {
-          return Home();
-        }));
-      }
-
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+        return Home();
+      }));
     }
-}
+  }
+
   Future<void> loginUser({email, password}) async {
     var email1 = email;
     var password1 = password;
@@ -392,13 +373,11 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
       print(data['success']);
       print(data['message']);
       print('تم تسجيل دخول المستخدم بنجاح');
-      SharedPreferencesController c =
-      SharedPreferencesController();
+      SharedPreferencesController c = SharedPreferencesController();
       await c.getInit();
       c.setData(key: "login", value: rememberMe);
       if (rememberMe) {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
           return Home();
         }));
       }
@@ -406,5 +385,4 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
       print('حدث خطأ أثناء تسجيل الدخول. الحالة: ${response.statusCode}');
     }
   }
-
 }

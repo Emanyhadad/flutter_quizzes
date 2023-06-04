@@ -1,7 +1,7 @@
 class ApiSetting {
   static String BASE_URL = 'https://studentucas.awamr.com/api';
   static String getAllOrders = '$BASE_URL/all/works';
-  static String postRegester = '$BASE_URL/auth/register/user';
+  static String postRegester = 'https://studentucas.awamr.com/api/auth/register/user';
   static String postLogin = 'https://studentucas.awamr.com/api/auth/login/user';
 
 
