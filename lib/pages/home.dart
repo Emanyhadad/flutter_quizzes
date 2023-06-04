@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizzes/controller/api_controller.dart';
 import 'package:flutter_quizzes/pojo/data.dart';
-import 'package:flutter_quizzes/pojo/product.dart';
 import 'package:flutter_quizzes/pojo/work.dart';
 import 'package:http/http.dart' as http;
 
@@ -76,8 +75,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
-        automaticallyImplyLeading: false, // Hide the back button
-
+        automaticallyImplyLeading: false,
       ),
       body: FutureBuilder<List<data>>(
         future: ApiController().getAllData(),

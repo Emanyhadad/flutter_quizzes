@@ -11,6 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'home.dart';
+import 'onBording.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,17 +57,43 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Timer(Duration(seconds: 3), () {
+  //     Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //             builder: (context) =>
+  //                 SharedPreferencesController().getData("login") ?? false
+  //                     ? Home()
+  //                     : Login()));
+  //   });
+  // }
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
-      Navigator.push(
+    Timer(Duration(seconds: 3), () async {
+      final bool isLoggedIn = await SharedPreferencesController().getData("login") ?? false;
+      final bool onBording1 = await SharedPreferencesController().getData("newUser") ?? false;
+
+      if (!onBording1) {
+        Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  SharedPreferencesController().getData("login") ?? false
-                      ? Home()
-                      : Login()));
+          MaterialPageRoute(builder: (context) => onBoardingPages(),));
+      } else {
+        if (isLoggedIn) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Login()),
+          );
+        }
+      }
     });
   }
 
@@ -74,19 +101,24 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-        gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [Colors.blue, AppColors.Screen],),),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.blue, AppColors.Screen],
+            ),
+          ),
           child: Align(
             alignment: Alignment.centerRight,
             child: FittedBox(
               fit: BoxFit.contain,
-              child: Image.asset('asset/splash.png',width: 422,height: 341,),
+              child: Image.asset(
+                'asset/splash.png',
+                width: 422,
+                height: 341,
+              ),
             ),
-          )
-      ),
+          )),
     );
   }
 }
