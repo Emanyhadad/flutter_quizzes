@@ -1,0 +1,14 @@
+<svg id="profile" xmlns="http://www.w3.org/2000/svg" width="27.191" height="27.191" viewBox="0 0 27.191 27.191">
+  <g id="Group_10469" data-name="Group 10469">
+    <g id="Group_10468" data-name="Group 10468">
+      <path id="Path_9023" data-name="Path 9023" d="M75.9,82.694v1.7h8.5V79.576l-6.84-2.826.037-1.437,1.705-2.561V69.1a5.1,5.1,0,1,0-10.2,0v3.654L70.8,75.311l.037,1.437L64,79.576v4.817h3.4v-1.7H65.7V80.713l6.869-2.839-.078-3.095L70.8,72.242V69.1a3.4,3.4,0,0,1,6.8,0v3.144L75.9,74.782l-.078,3.095,6.869,2.836v1.981Z" transform="translate(-60.601 -60.601)" fill="#7f8fa6"/>
+      <rect id="Rectangle_4218" data-name="Rectangle 4218" width="1" height="2" transform="translate(8.595 21.595)" fill="#7f8fa6"/>
+      <rect id="Rectangle_4219" data-name="Rectangle 4219" width="2" height="2" transform="translate(11.595 21.595)" fill="#7f8fa6"/>
+      <rect id="Rectangle_4220" data-name="Rectangle 4220" width="2" height="2" transform="translate(11.595 9.595)" fill="#7f8fa6"/>
+      <path id="Path_9024" data-name="Path 9024" d="M1.7,1.7H8.5V0H0V8.5H1.7Z" fill="#7f8fa6"/>
+      <path id="Path_9025" data-name="Path 9025" d="M1.7,368H0v7.647H7.647v-1.7H1.7Z" transform="translate(0 -348.457)" fill="#7f8fa6"/>
+      <path id="Path_9026" data-name="Path 9026" d="M352,0V1.7h6.8V8.5h1.7V0Z" transform="translate(-333.306)" fill="#7f8fa6"/>
+      <path id="Path_9027" data-name="Path 9027" d="M358.8,358.8H352v1.7h8.5V352h-1.7Z" transform="translate(-333.306 -333.306)" fill="#7f8fa6"/>
+    </g>
+  </g>
+</svg>

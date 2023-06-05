@@ -10,6 +10,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../pojo/data.dart';
+import '../pojo/order.dart';
 import '../pojo/user.dart';
 
 class ApiController with ApiMixin {
@@ -84,22 +85,7 @@ class ApiController with ApiMixin {
     return list;
   }
 
-  Future<List<data>> getAllData() async {
-    List<data> list = [];
-    Uri uri = Uri.parse("http://demo-api.mr-dev.tech/api/users");
-    http.Response response = await http.get(uri);
 
-    if (response.statusCode == 200) {
-      var body = json.decode(response.body);
-      body.toString();
-      print(body.toString());
-      body["data"].forEach((e) {
-        print(body);
-        list.add(data.fromJson(e));
-      });
-    }
-    return list;
-  }
   Future<List<data>> getAllData1() async {
     List<data> list = [];
     Uri uri = Uri.parse("http://demo-api.mr-dev.tech/api/users");
@@ -133,6 +119,38 @@ class ApiController with ApiMixin {
 
 
 
+  Future<List<data>> getAllData() async {
+    List<data> list = [];
+    Uri uri = Uri.parse("http://demo-api.mr-dev.tech/api/users");
+    http.Response response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      var body = json.decode(response.body);
+      body.toString();
+      print(body.toString());
+      body["data"].forEach((e) {
+        print(body);
+        list.add(data.fromJson(e));
+      });
+    }
+    return list;
+  }
+  Future<List<Work>> getAllWork() async {
+    List<Work> list = [];
+    Uri uri = Uri.parse("https://studentucas.awamr.com/api/all/works");
+    http.Response response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      var body = json.decode(response.body);
+      body.toString();
+      print(body.toString());
+      body["data"].forEach((e) {
+        print(body);
+        list.add(Work.fromJson(e));
+      });
+    }
+    return list;
+  }
 
   Future<ApiResponse> register({required User user1}) async {
     Uri url = Uri.parse('https://studentucas.awamr.com/api/auth/register/user');
@@ -246,5 +264,77 @@ class ApiController with ApiMixin {
     return failedResponse;
   }
 
+  Future<ApiResponse> createOrder({required OrderResponse orderResponse}) async {
+      final response = await http.post(
+        Uri.parse('https://studentucas.awamr.com/api/create/order'),
+        headers: {
+          'Authorization': "Bearer "+GetStorage().read("token"),
+        },
+        body: orderResponse.toJsonOrder(),
+      );
 
+      if (response.statusCode == 200) {
+        print('Order created successfully');
+        var jsonResponse = jsonDecode(response.body);
+        ApiResponse rrespose = ApiResponse.fromJson(jsonResponse);
+        return rrespose;
+      }
+      return failedResponse;
+  }
+
+  Future post_data2(String user_token, Map data, File file, String namerequest) async {
+
+    var uri = Uri.parse('https://studentucas.awamr.com/api/create/order');
+
+    var request = await http.MultipartRequest('POST', uri);
+    // add header
+    request.headers.addAll({
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $user_token',
+    });
+    // add body data without file
+    data.forEach((key, value) {
+      request.fields[key] = value;
+    });
+
+    if (file != null) {
+      var length = await file.length();
+      var stream = http.ByteStream(file.openRead());
+      stream.cast();
+      var multipartFile = http.MultipartFile(namerequest, stream, length,
+          filename: (file.path));
+      request.files.add(multipartFile);
+    }
+
+    var myrequest = await request.send();
+
+    var response = await http.Response.fromStream(myrequest);
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      Map responsebody = jsonDecode(response.body);
+      print(responsebody);
+      return responsebody;
+    } else {
+      return response;
+    }
+  }
+
+  Future<void> post_data(String token, Map<String, String> data,
+      List<http.MultipartFile> files, String field) async {
+    String url = 'https://studentucas.awamr.com/api/create/order';
+
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    request.headers['Authorization'] = 'Bearer $token';
+    request.fields.addAll(data);
+    request.files.addAll(files);
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      print('Order created successfully');
+    } else {
+      print('Failed to create order');
+    }
+  }
 }
+
+

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color Screen = Color(0xFF6FC8FB);
+  static const Color Screen2 = Color(0xFFEAEFFF);
+
   static const Color Border = Color(0xFF6236FF);
   static const Color background = Color(0xFFF2F6F6);
   static const Color stroke = Color(0xffF0F0F0);

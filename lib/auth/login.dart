@@ -8,6 +8,7 @@ import 'package:flutter_quizzes/pojo/ApiResponse.dart';
 import 'package:flutter_quizzes/auth/sign_up.dart';
 import 'package:http/http.dart' as http;
 import '../pages/home.dart';
+import '../pages/mainpage.dart';
 import '../pojo/AppColors.dart';
 import '../controller/SharedPreferencesController.dart';
 
@@ -348,7 +349,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
       await c.getInit();
       c.setData(key: "login", value: rememberMe);
       Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-        return Home();
+        return MyHomePage0();
       }));
     }
   }
@@ -378,7 +379,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
       c.setData(key: "login", value: rememberMe);
       if (rememberMe) {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return Home();
+          return MyHomePage0();
         }));
       }
     } else {

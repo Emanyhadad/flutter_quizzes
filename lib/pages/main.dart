@@ -11,6 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'home.dart';
+import 'mainpage.dart';
 import 'onBording.dart';
 
 Future<void> main() async {
@@ -74,13 +75,17 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), () async {
-      final bool isLoggedIn = await SharedPreferencesController().getData("login") ?? false;
-      final bool onBording1 = await SharedPreferencesController().getData("newUser") ?? false;
+      final bool isLoggedIn =
+          await SharedPreferencesController().getData("login") ?? false;
+      final bool onBording1 =
+          await SharedPreferencesController().getData("newUser") ?? false;
 
       if (!onBording1) {
         Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => onBoardingPages(),));
+            context,
+            MaterialPageRoute(
+              builder: (context) => onBoardingPages(),
+            ));
       } else {
         if (isLoggedIn) {
           Navigator.push(
