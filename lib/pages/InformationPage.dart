@@ -1,4 +1,4 @@
-import 'dart:html';
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -56,37 +56,40 @@ class _InformationPageState extends State<InformationPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          ClipPath(
-            clipper: CustomCurveClipper(),
-            child: Container(
-              width: double.infinity,
-              height: 80,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    Color(0xFF0E4DFB),
-                    Color(0xFF6FC8FB),
-                  ],
-                ),
+      appBar: PreferredSize(
+        preferredSize: Size(double.infinity, 80),
+        child: ClipPath(
+          clipper: CustomCurveClipper(),
+          child: Container(
+            width: double.infinity,
+            height: 80,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Color(0xFF0E4DFB),
+                  Color(0xFF6FC8FB),
+                ],
               ),
-              child: Center(
-                child: Text(
-                  'Smith',
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
+            ),
+            child: Center(
+              child: Text(
+                'Smith',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
           ),
-          SingleChildScrollView(
-            child: Padding(
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,6 +128,7 @@ class _InformationPageState extends State<InformationPage>
                             "image",
                             image.path,
                           );
+                          selectedImages.add(file.toString() as String);
                           print(image.path);
                         }
                       }
@@ -298,6 +302,7 @@ class _InformationPageState extends State<InformationPage>
                             filess,
                             'photos[]',
                           );
+
                         } else {
                           print("photo null");
                         }
@@ -330,8 +335,8 @@ class _InformationPageState extends State<InformationPage>
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

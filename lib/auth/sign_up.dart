@@ -67,13 +67,12 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
     var _selectedOccupation;
     return Scaffold(
       backgroundColor: AppColors.Screen,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              height: 170,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              height: 200,
               padding: EdgeInsets.all(40),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -84,10 +83,8 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
               ),
               alignment: Alignment.bottomCenter,
             ),
-          ),
-          Expanded(
-            flex: 5,
-            child: Container(
+            Container(
+              height:  MediaQuery.of(context).size.height/1.2,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -726,8 +723,8 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -751,14 +748,14 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
   }
 
   Future<void> _register() async {
-    ApiResponse rrespose = await ApiController().Rigester(user1: user1);
+    ApiResponse rrespose = await ApiController().Rigester(user1: user);
     if (!rrespose.success!) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Home()));
     }
   }
 
-  User get user1 {
+  User get user {
     User user1 = User();
     user1.name = _fullNameController.text;
     user1.email = _emailController.text;

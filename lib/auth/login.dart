@@ -40,13 +40,12 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.Screen,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              height: 170,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height/3,
               padding: EdgeInsets.all(40),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -62,10 +61,8 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                 width: 133,
               ),
             ),
-          ),
-          Expanded(
-            flex: 5,
-            child: Container(
+            Container(
+              height: MediaQuery.of(context).size.height/1.5,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -98,71 +95,6 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       ),
                     ),
                     SizedBox(height: 16.0),
-                    // TextField(
-                    //   controller: _phoneController,
-                    //   decoration: InputDecoration(
-                    //     labelStyle: TextStyle(color: Colors.blue),
-                    //     hintText: '00000',
-                    //     hintStyle: TextStyle(
-                    //       color: Colors.grey,
-                    //       fontSize: 16,
-                    //     ),
-                    //     fillColor: Colors.white,
-                    //     filled: true,
-                    //     contentPadding:
-                    //     EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    //     focusedBorder: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.all(Radius.circular(5)),
-                    //       borderSide: BorderSide(
-                    //         color: Colors.blue,
-                    //         width: 1,
-                    //         style: BorderStyle.solid,
-                    //       ),
-                    //     ),
-                    //     enabledBorder: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.all(Radius.circular(5)),
-                    //       borderSide: BorderSide(
-                    //         color: AppColors.stroke2,
-                    //         width: 1,
-                    //         style: BorderStyle.solid,
-                    //       ),
-                    //     ),
-                    //     prefixIcon: Padding(
-                    //       padding: const EdgeInsets.only(left: 15, right: 15),
-                    //       child: DropdownButton<String>(
-                    //         items: [
-                    //           DropdownMenuItem<String>(
-                    //             value: '+966',
-                    //             child: Row(
-                    //               children: [
-                    //                 CircleAvatar(
-                    //                   child: Image.asset('asset/splash.png'),
-                    //                   radius: 15,
-                    //                 ),
-                    //                 Text("+966")
-                    //               ],
-                    //             ),
-                    //           ),
-                    //           DropdownMenuItem<String>(
-                    //             value: '+91',
-                    //             child: Row(
-                    //               children: [
-                    //                 CircleAvatar(
-                    //                   child: Image.asset('asset/splash.png'),
-                    //                   radius: 15,
-                    //                 ),
-                    //                 Text("+91")
-                    //               ],
-                    //             ),
-                    //           ),
-                    //           // Add more options as needed
-                    //         ],
-                    //         value: '+966', // Default value
-                    //         onChanged: (value) {},
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                     TextField(
                       controller: _emailController,
                       cursorColor: Colors.blue,
@@ -316,8 +248,8 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

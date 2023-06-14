@@ -44,7 +44,10 @@ class _MyHomePageState extends State<MyHomePage0> {
         bottomNavigationBar: BottomNavigationBar(
           onTap: onTabTapped,
           currentIndex: Index,
+          type: BottomNavigationBarType.fixed,
           backgroundColor: AppColors.Screen,
+          unselectedLabelStyle: TextStyle(color: Colors.white),
+          selectedLabelStyle:TextStyle(color: Colors.blue) ,
           items: [
             BottomNavigationBarItem(
               activeIcon:SvgPicture.asset(
@@ -59,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage0> {
                 height: 20,
               ),
               label: 'Service',
+
             ),
             BottomNavigationBarItem(
               activeIcon: SvgPicture.asset(

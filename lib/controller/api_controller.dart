@@ -5,13 +5,13 @@ import 'package:flutter_quizzes/controller/api_mixin.dart';
 import 'package:flutter_quizzes/controller/api_setting.dart';
 import 'package:flutter_quizzes/pojo/ApiResponse.dart';
 import 'package:flutter_quizzes/pojo/product.dart';
+import 'package:flutter_quizzes/pojo/user.dart';
 import 'package:flutter_quizzes/pojo/work.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../pojo/data.dart';
 import '../pojo/order.dart';
-import '../pojo/user.dart';
 
 class ApiController with ApiMixin {
   Future<dynamic> getAllProduct() async {
@@ -55,11 +55,7 @@ class ApiController with ApiMixin {
 
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
-      if (body is List) {
-        for (var item in body) {
-          list.add(Work.fromJson(item));
-        }
-      }
+
     } else {
       // Handle other possible status codes (e.g., 401) here
       throw Exception('Failed to fetch orders: ${response.statusCode}');
@@ -249,7 +245,7 @@ class ApiController with ApiMixin {
     return failedResponse;
   }
   Future<ApiResponse> Rigester({required User user1}) async {
-    Uri url = Uri.parse(ApiSetting.postRegester);
+    Uri url = Uri.parse(ApiSetting.register);
 
     http.Response response = await http.post(
       url,
@@ -261,7 +257,7 @@ class ApiController with ApiMixin {
       ApiResponse rrespose = ApiResponse.fromJson(jsonResponse);
       return rrespose;
     }
-    return failedResponse;
+    return failedResponse ;
   }
 
   Future<ApiResponse> createOrder({required OrderResponse orderResponse}) async {
@@ -272,7 +268,6 @@ class ApiController with ApiMixin {
         },
         body: orderResponse.toJsonOrder(),
       );
-
       if (response.statusCode == 200) {
         print('Order created successfully');
         var jsonResponse = jsonDecode(response.body);
