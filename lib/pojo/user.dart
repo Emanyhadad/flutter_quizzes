@@ -33,13 +33,10 @@ class User {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {
-      'id': id,
       'name': name,
       'email': email,
       'photo': photo,
       'phone': phone,
-      'active': active,
-      'token': token,
     };
     return data;
   }

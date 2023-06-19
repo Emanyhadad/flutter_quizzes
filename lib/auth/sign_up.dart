@@ -65,6 +65,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     var _selectedOccupation;
+
     return Scaffold(
       backgroundColor: AppColors.Screen,
       body: SingleChildScrollView(
@@ -84,7 +85,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
               alignment: Alignment.bottomCenter,
             ),
             Container(
-              height:  MediaQuery.of(context).size.height/1.2,
+              height: MediaQuery.of(context).size.height / 1.2,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -118,6 +119,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                         ],
                       ),
                     ),
+                    SizedBox(height: 20,),
                     Expanded(
                       child: TabBarView(
                         controller: controllerTab,
@@ -749,9 +751,15 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
 
   Future<void> _register() async {
     ApiResponse rrespose = await ApiController().Rigester(user1: user);
-    if (!rrespose.success!) {
+    print(rrespose.message);
+    print(rrespose.success);
+    print(rrespose.code);
+    print(rrespose.data);
+    if (rrespose.success!) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Home()));
+    } else {
+      showError(rrespose.message!);
     }
   }
 
@@ -761,7 +769,28 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
     user1.email = _emailController.text;
     user1.password = _passwordController.text;
     user1.phone = _phoneController.text;
+
     return user1;
+  }
+
+  void showError(String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Error!"),
+          content: Text(errorMessage),
+          actions: <Widget>[
+            new TextButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
 // Future<void> registerUser() async {

@@ -244,15 +244,18 @@ class ApiController with ApiMixin {
     }
     return failedResponse;
   }
+
   Future<ApiResponse> Rigester({required User user1}) async {
-    Uri url = Uri.parse(ApiSetting.register);
+    Uri url = Uri.parse(ApiSetting.postRegester);
 
     http.Response response = await http.post(
       url,
       body: user1.toJsonRegister(),
     );
+  print(response.body);
+  print(response.statusCode);
 
-    if (response.statusCode == 201 || response.statusCode == 400) {
+    if (response.statusCode == 200 || response.statusCode == 400) {
       var jsonResponse = jsonDecode(response.body);
       ApiResponse rrespose = ApiResponse.fromJson(jsonResponse);
       return rrespose;
@@ -272,6 +275,7 @@ class ApiController with ApiMixin {
         print('Order created successfully');
         var jsonResponse = jsonDecode(response.body);
         ApiResponse rrespose = ApiResponse.fromJson(jsonResponse);
+        print(rrespose.data);
         return rrespose;
       }
       return failedResponse;
